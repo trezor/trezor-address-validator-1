@@ -456,9 +456,13 @@ describe('WAValidator.validate()', function () {
             //integrated addresses
             valid('4Gd4DLiXzBmbVX2FZZ3Cvu6fUaWACup1qDowprUCje1kSP4FmbftiJMSfV8kWZXNqmVwj4m52xqtgFNUudVmsmGkGvkLcCibWfVUfUFVB7', 'monero');
             valid('4J5sF94AzXgFgx8LuWc9dcWkJkGkD3cL3L2AuhX6QA9jFvSxxj6QhHqHXqM2b2Go7G8RyDzEbHxYd9G26XUUbuJChipEyBz9fENMU2Ua9b', 'XMR');
+
+            // subaddress
+            valid('8A9XmWsATrhfedtNhTMNKELwfCwMVAk2iVTdUJdFRb2AC4tV4VeBjsCLYR9cSQTwnvLo4MAuQFMLP6Si4xp6t6BS788db3t', 'monero');
+            valid('87i7kA61fNvMboXiYWHVygPAggKJPETFqLXXcdH4mQTrECvrTxZMtt6e6owj1k8jUVjNR11eBuBMWHFBtxAwEVcm9dcSUxr', 'xmr');
         });
 
-        it('should match the expected COIN address type', function () {
+        it('should match the expected monero address type', function () {
             isValidAddressType('47zQ5LAivg6hNCgijXSEFVLX7mke1bgM6YGLFaANDoJbgXDymcAAZvvMNt2PmMpqEe5qRy2zyfMYXdwpmdyitiFh84xnPG2', 'xmr', 'prod', addressType.ADDRESS);
             isValidAddressType('44643dtxcxjgMWEQLo6mh1c4d9Zxx9GbgK9hEj9iGSiFEryCkbwHyJ3JqxZJRqeC3Hb7ZBLKq5NkaJwR1x95EYnR1bTgN6d', 'Monero', 'prod', undefined);
         });
@@ -739,6 +743,10 @@ describe('WAValidator.validate()', function () {
             )
             valid(
                 'LK8CGQ17G9R3ys3Xf33wCeViD2B95jgdpjAhcRsjuheJ784dumXn7g3RPAzedWpFq364jJKYL9dkQ8mY66sZG9BiCtWq1AYo1oJTVqgUcQ',
+                'loki'
+            )
+            valid(
+                'LLhSDqBZdjLQWajr4pBcFkdjL8oGY7MDvfJkKfrQVaokfDMxU6bDVb6h8tsD1jpKpSXbbB1p8RxPbA7fmjvLGjicKLBdQvDMbHA7TWVCUQ',
                 'loki'
             )
             //   subaddress
