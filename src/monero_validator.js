@@ -3,17 +3,25 @@ var cryptoUtils = require('./crypto/utils')
 var cnBase58 = require('./crypto/cnBase58')
 
 var DEFAULT_NETWORK_TYPE = 'prod'
+var testnetRegTest = new RegExp(
+  `^[A9][123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz]{94}$`
+)
 var addressRegTest = new RegExp(
-  '^[123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz]{95}$'
+  '^4[123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz]{94}$'
+)
+var subAddressRegTest = new RegExp(
+  '^8[123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz]{94}$'
 )
 var integratedAddressRegTest = new RegExp(
-  '^[123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz]{106}$'
+  '^4[123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz]{105}$'
 )
 
 function validateNetwork(decoded, currency, networkType, addressType) {
   var network = currency.addressTypes
   if (addressType == 'integrated') {
     network = currency.iAddressTypes
+  } else if (addressType == 'subaddress') {
+    network = currency.subAddressTypes
   }
   var at = parseInt(decoded.substr(0, 2), 16).toString()
 
@@ -42,8 +50,14 @@ module.exports = {
   isValidAddress: function(address, currency, networkType) {
     networkType = networkType || DEFAULT_NETWORK_TYPE
     var addressType = 'standard'
-    if (!addressRegTest.test(address)) {
-      if (integratedAddressRegTest.test(address)) {
+    if (networkType === 'testnet') {
+      if (!testnetRegTest.test(address)) {
+        return false;
+      }
+    } else if (!addressRegTest.test(address)) {
+      if (subAddressRegTest.test(address)) {
+        addressType = 'subaddress'
+      } else if (integratedAddressRegTest.test(address)) {
         addressType = 'integrated'
       } else {
         return false
