@@ -3,6 +3,7 @@ var ETHValidator = require('./ethereum_validator');
 var BTCValidator = require('./bitcoin_validator');
 var ADAValidator = require('./ada_validator');
 var XMRValidator = require('./monero_validator');
+var LokiValidator = require('./loki_validator');
 var NANOValidator = require('./nano_validator');
 var SCValidator = require('./siacoin_validator');
 var TRXValidator = require('./tron_validator');
@@ -307,6 +308,7 @@ var CURRENCIES = [
         name: 'Monero',
         symbol: 'xmr',
         addressTypes: { prod: ['18'], testnet: ['53'] },
+        subAddressTypes: { prod: ['42'], testnet: ['63'] },
         iAddressTypes: { prod: ['19'], testnet: ['54'] },
         validator: XMRValidator,
     }, {
@@ -1063,9 +1065,10 @@ var CURRENCIES = [
     }, {
         name: 'Loki',
         symbol: 'loki',
-        addressTypes: { prod: ['114', '116'], testnet: [] },
-        iAddressTypes: { prod: ['115'], testnet: [] },
-        validator: XMRValidator,
+        addressTypes: { prod: ['114', '116'], testnet: ['156'] },
+        subAddressTypes: { prod: ['114', '116'], testnet: ['158'] },
+        iAddressTypes: { prod: ['115'], testnet: ['157'] },
+        validator: LokiValidator,
     }, {
         name: 'LBRY Credits',
         symbol: 'lbc',
